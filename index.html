@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keshav Poudel - Personal Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+
+        :root {
+            --primary-color: #2a2a72;
+            --secondary-color: #5e60ce;
+            --accent-color: #18836d;
+            --text-color: #333;
+            --background-color: #f5f5f5;
+            --white: #fff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 7%;
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .navbar a {
+            font-size: 1rem;
+            margin-left: 2rem;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            color: var(--accent-color);
+        }
+
+        .navbar a::after {
+            content: '';
+            height: 3px;
+            width: 0;
+            background: var(--accent-color);
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover::after, .navbar a.active::after {
+            width: 100%;
+        }
+
+        #menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 7%;
+            background: url('/api/placeholder/1000/600') no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            color: var(--white);
+        }
+
+        .hero-content h5 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border-radius: 4px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #106e59;
+            transform: translateY(-3px);
+        }
+
+        .hero-socials {
+            margin-top: 2rem;
+        }
+
+        .hero-socials a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: var(--white);
+            color: var(--primary-color);
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .hero-socials a:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-5px);
+        }
+
+        /* About Section */
+        section {
+            padding: 6rem 7%;
+        }
+
+        .about {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .about-img {
+            flex: 1 1 400px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text {
+            flex: 1 1 400px;
+        }
+
+        .heading {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text .info-list {
+            margin-bottom: 2rem;
+        }
+
+        .info-list li {
+            display: flex;
+            margin-bottom: 1rem;
+            list-style: none;
+        }
+
+        .info-list li strong {
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--white);
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-box {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-box i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-box {
+            position: relative;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            background: var(--white);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            transition: 0.5s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            text-align: center;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .portfolio-box:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-box:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-overlay p {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--white);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .contact-info {
+            flex: 1 1 400px;
+        }
+
+        .contact-form {
+            flex: 1 1 400px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+            min-width: 20px;
+        }
+
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-socials {
+            display: flex;
+            margin-top: 2rem;
+        }
+
+        .contact-socials a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .contact-socials a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .contact-form form {
+            background: var(--background-color);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-box input, .input-box textarea {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .input-box textarea {
+            resize: none;
+            height: 180px;
+        }
+
+        .input-box input:focus, .input-box textarea:focus {
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Media Queries */
+        @media (max-width: 991px) {
+            section {
+                padding: 4rem 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #menu-icon {
+                display: block;
+            }
+
+            .navbar {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: 0.5s;
+            }
+
+            .navbar.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .navbar a {
+                display: block;
+                margin: 1.5rem;
+                padding-left: 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <h1 class="logo">Keshav.</h1>
+        <div class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#about">About</a>
+            <a href="#passions">Passions</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div id="menu-icon" class="fas fa-bars"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h5>Hello, I'm</h5>
+            <h1>Keshav Poudel</h1>
+            <p>Adventure enthusiast, cinematographer, and space science aficionado. Exploring the world through mountains, lenses, and the stars.</p>
+            <a href="#about" class="btn">More About Me</a>
+            <div class="hero-socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="/api/placeholder/600/600" alt="Keshav Poudel">
+        </div>
+        <div class="about-text">
+            <h2 class="heading">About Me</h2>
+            <p>I'm Keshav Poudel, a passionate adventurer and visual storyteller from Nepal. With a deep love for mountains and exploration, I blend my interests in cinematography, space science, and athletics to create unique perspectives on the world around us.</p>
+            <p>Whether I'm trekking through the Himalayas, capturing breathtaking landscapes through my lens, or studying celestial bodies, I'm constantly seeking new experiences and knowledge. My journey combines physical exploration with creative expression.</p>
+            <ul class="info-list">
+                <li><strong>Name:</strong> Keshav Poudel</li>
+                <li><strong>Email:</strong> contact@keshavpoudel.com</li>
+                <li><strong>Phone:</strong> +977 9XXXXXXXXX</li>
+                <li><strong>Location:</strong> Kathmandu, Nepal</li>
+            </ul>
+            <a href="#" class="btn">Download CV</a>
+        </div>
+    </section>
+
+    <!-- Services/Passions Section -->
+    <section class="services" id="passions">
+        <h2 class="heading" style="text-align: center;">My Passions</h2>
+        <div class="services-container">
+            <div class="service-box">
+                <i class="fas fa-mountain"></i>
+                <h3>Mountain Exploration</h3>
+                <p>Climbing peaks, exploring trails, and connecting with the majestic Himalayan landscapes that surround my homeland.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-video"></i>
+                <h3>Cinematography</h3>
+                <p>Capturing stories through motion pictures, editing compelling narratives, and creating visual experiences that move audiences.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-meteor"></i>
+                <h3>Space Science</h3>
+                <p>Studying astronomy, astrophysics, and the wonders of our universe to better understand our place among the stars.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-hiking"></i>
+                <h3>Trekking</h3>
+                <p>Embarking on journeys through diverse terrains and cultures, discovering hidden gems in remote regions of Nepal and beyond.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-meditation"></i>
+                <h3>Meditation</h3>
+                <p>Practicing mindfulness and meditation techniques to maintain balance and clarity in both my adventures and daily life.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-futbol"></i>
+                <h3>Sports</h3>
+                <p>Engaging in cricket, football, and swimming to maintain physical fitness and enjoy the camaraderie of team activities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <h2 class="heading" style="text-align: center;">My Work</h2>
+        <div class="portfolio-container">
+            <div class="portfolio-box">
+                <img class="portfolio-img" src="/api/placeholder/600/400" alt="Mountain Expedition">
+                <div class="portfolio-overlay">
+                    <h3>Annapurna Circuit</h3>
+                    <p>A 21-day trek through one of the world's most diverse landscapes.</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <img class="portfolio-img" src="/api/placeholder/600/400" alt="Cinematography Project">
+                <div class="portfolio-overlay">
+                    <h3>Nepal: Through My Lens</h3>
+                    <p>A short documentary showcasing Nepal's natural beauty and cultural heritage.</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <img class="portfolio-img" src="/api/placeholder/600/400" alt="Space Science Project">
+                <div class="portfolio-overlay">
+                    <h3>Night Sky Photography</h3>
+                    <p>Capturing the Milky Way over the Himalayan peaks.</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <img class="portfolio-img" src="/api/placeholder/600/400" alt="Sports Tournament">
+                <div class="portfolio-overlay">
+                    <h3>Local Cricket Tournament</h3>
+                    <p>Documentation of community sports events in rural Nepal.</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <img class="portfolio-img" src="/api/placeholder/600/400" alt="Meditation Retreat">
+                <div class="portfolio-overlay">
+                    <h3>Meditation in the Mountains</h3>
+                    <p>A visual journey through Nepal's spiritual landscapes.</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+            <div class="portfolio-box">
+                <img class="portfolio-img" src="/api/placeholder/600/400" alt="Travel Documentary">
+                <div class="portfolio-overlay">
+                    <h3>Paths Less Traveled</h3>
+                    <p>Exploring hidden gems and remote villages across the Himalayan region.</p>
+                    <a href="#" class="btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="heading" style="text-align: center;">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>contact@keshavpoudel.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p>+977 9XXXXXXXXX</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-details">
+                        <h4>Location</h4>
+                        <p>Kathmandu, Nepal</p>
+                    </div>
+                </div>
+                <div class="contact-socials">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <div class="input-box">
+                        <input type="text" placeholder="Your Name">
+                    </div>
+                    <div class="input-box">
+                        <input type="email" placeholder="Your Email">
+                    </div>
+                    <div class="input-box">
+                        <input type="text" placeholder="Subject">
+                    </div>
+                    <div class="input-box">
+                        <textarea placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Keshav Poudel. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Menu Icon Toggle
+        let menuIcon = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('.navbar');
+
+        menuIcon.addEventListener('click', () => {
+            menuIcon.classList.toggle('fa-times');
+            navbar.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.navbar a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuIcon.classList.remove('fa-times');
+                navbar.classList.remove('active');
+            });
+        });
+
+        // Active link on scroll
+        window.addEventListener('scroll', () => {
+            let sections = document.querySelectorAll('section');
+            let navLinks = document.querySelectorAll('.navbar a');
+            
+            sections.forEach(sec => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+                
+                if(top >= offset && top < offset + height) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        document.querySelector('.navbar a[href*=' + id + ']').classList.add('active');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
